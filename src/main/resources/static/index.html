@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"
+      ng-app="store">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="JS/script.js"></script>
+    <link type="text/css" href="CSS/style.css" rel="stylesheet">
+    <title>Guitar shop</title>
+</head>
+<body>
+<div ng-controller="indexController">
+    <h4>Filters</h4>
+    <form>
+        <label>min price
+            <input ng-model="min_price" type="number" placeholder="min price">
+        </label>
+        <label>max price
+            <input ng-model="max_price" type="number" placeholder="max price">
+        </label>
+        <label>title part
+            <input ng-model="title_part" type="text" placeholder="title part">
+        </label>
+        <button ng-click="loadProducts()" class="btn btn-primary">Filter</button>
+    </form>
+    <hr>
+    <div class="btn_layer"></div>
+    <table>
+        <thead>
+        <td>ID</td>
+        <td>title</td>
+        <td>price</td>
+        <td>action</td>
+        </thead>
+        <tbody>
+        <tr ng-repeat="prod in productList">
+            <td>{{prod.id}}</td>
+            <td>{{prod.title}}</td>
+            <td>{{prod.price}}</td>
+            <td>
+                <button ng-click="deleteProduct(prod.id)" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <h4>Save Or Update</h4>
+    <form title="Find by id">
+        <label>Id
+            <input ng-model="product.id" type="number" placeholder="id">
+        </label>
+        <button ng-click="findById()" class="btn-primary btn">Find</button>
+    </form>
+    <br>
+    <form>
+        <label>Product title
+            <input ng-model="product.title" type="text" placeholder="product title">
+        </label>
+        <label>Product price
+            <input ng-model="product.price" type="number" placeholder="product price">
+        </label>
+        <button ng-click="update()" class="btn btn-primary">Save Or Update</button>
+    </form>
+    <hr>
+    <h4>Add New Product</h4>
+    <form>
+        <input ng-model="newTitle" type="text" placeholder="new title">
+        <input ng-model="newPrice" type="number" placeholder="new price">
+        <button ng-click="add()" class="btn-primary btn">Add new product</button>
+    </form>
+</div>
+</body>
+</html>
