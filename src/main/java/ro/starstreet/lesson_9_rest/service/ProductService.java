@@ -46,7 +46,6 @@ public class ProductService {
         if (productDto.getId() == null) {
             productDto.setId(-1L);
         }
-        System.out.println(productDto);
         return repository.findById(productDto.getId())
                 .map(product -> {
                     product.setTitle(productDto.getTitle());

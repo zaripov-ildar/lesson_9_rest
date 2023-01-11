@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="JS/script.js"></script>
     <link type="text/css" href="CSS/style.css" rel="stylesheet">
-    <title>Guitar shop</title>
+    <title>Product Store</title>
 </head>
 <body>
 <div ng-controller="indexController">
@@ -27,25 +27,63 @@
         <button ng-click="loadProducts()" class="btn btn-primary">Filter</button>
     </form>
     <hr>
-    <div class="btn_layer"></div>
-    <table>
-        <thead>
-        <td>ID</td>
-        <td>title</td>
-        <td>price</td>
-        <td>action</td>
-        </thead>
-        <tbody>
-        <tr ng-repeat="prod in productList">
-            <td>{{prod.id}}</td>
-            <td>{{prod.title}}</td>
-            <td>{{prod.price}}</td>
-            <td>
-                <button ng-click="deleteProduct(prod.id)" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="flex-container">
+        <div class="product_list">
+            <table>
+                <caption>Product list</caption>
+                <thead>
+                <td>ID</td>
+                <td>title</td>
+                <td>price</td>
+                <td>action</td>
+                </thead>
+                <tbody>
+                <tr ng-repeat="prod in productList">
+                    <td>{{prod.id}}</td>
+                    <td>{{prod.title}}</td>
+                    <td>{{prod.price}}</td>
+                    <td>
+                        <button ng-click="deleteProduct(prod.id)" class="btn btn-danger">Delete</button>
+                        <button ng-click="changeAmount(prod.id,1)" class="btn-primary btn">Add to cart</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="btn_layer"></div>
+        </div>
+        <div class="cart">
+            <table>
+                <caption>Cart</caption>
+                <thead>
+                <td>ID</td>
+                <td>Title</td>
+                <td>Amount</td>
+                <td>Action</td>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(id, product) in cartMap">
+                    <td>{{id}}</td>
+                    <td>{{product.title}}</td>
+                    <td>{{product.amount}}</td>
+                    <td>
+                        <div>
+                            <div class="flex-container">
+                                <button ng-click="changeAmount(id,-1)" class="btn-primary btn">Decrease</button>
+                                <button ng-click="changeAmount(id,1)" class="btn-primary btn">Increase</button>
+                            </div>
+                            <div>
+                                <button ng-click="removeFromCart(id)" class="btn-danger btn">Remove from the cart
+                                </button>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <hr>
     <h4>Save Or Update</h4>
     <form title="Find by id">
@@ -71,6 +109,7 @@
         <input ng-model="newPrice" type="number" placeholder="new price">
         <button ng-click="add()" class="btn-primary btn">Add new product</button>
     </form>
+
 </div>
 </body>
 </html>

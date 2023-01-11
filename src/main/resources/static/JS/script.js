@@ -12,8 +12,7 @@ angular.module('store', []).controller('indexController', function ($scope, $htt
         id: null,
         title: null,
         price: null
-    }
-
+    };
 
     $scope.showButtonLayer = function () {
         let btn_layer = document.querySelector(".btn_layer");
@@ -40,21 +39,21 @@ angular.module('store', []).controller('indexController', function ($scope, $htt
                 page: pageNum
             }
         }).then(function (response) {
-            console.log(response);
             $scope.productList = response.data["content"];
             totalPages = response.data["totalPages"];
-            console.log($scope.productList);
             $scope.showButtonLayer();
-        })
-    }
+        });
+    };
 
     $scope.deleteProduct = function (productId) {
+        $scope.removeFromCart(productId);
         $http({
             url: contextPath + "/" + productId,
             method: "DELETE"
         }).then(function () {
             $scope.loadProducts();
-        })
+        });
+
     };
 
 
@@ -88,7 +87,6 @@ angular.module('store', []).controller('indexController', function ($scope, $htt
     }
 
     $scope.findById = function () {
-        console.log($scope.product.id);
         $http({
             url: contextPath + "/" + $scope.product.id,
             method: "GET"
@@ -96,6 +94,40 @@ angular.module('store', []).controller('indexController', function ($scope, $htt
             $scope.product.title = response.data["title"];
             $scope.product.price = response.data["price"];
             $scope.product.id = response.data["id"];
+        })
+    };
+
+
+    $scope.changeAmount = function (id, amount){
+        $http({
+            url:contextPath + "/cart/changeAmount",
+            method:"PUT",
+            params:{
+                id:id,
+                amount:amount
+            }
+        }).then(function(response){
+            console.log(response.data);
+            $scope.cartMap = response.data;
+        })
+    };
+
+    $scope.loadCart = function (){
+        $http({
+            url:contextPath + "/cart",
+            method: "GET"
+        }).then(function (response){
+            $scope.cartMap = response.data;
+        })
+    };
+
+
+    $scope.removeFromCart = function (id){
+        $http({
+            url:contextPath + "/cart/" + id,
+            method:"DELETE"
+        }).then(function(){
+            $scope.loadCart();
         })
     };
 

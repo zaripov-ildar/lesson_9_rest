@@ -23,19 +23,29 @@ table tbody tr {
 }
 
 table tbody tr:nth-of-type(even) {
-    background-color: rgb(200,200,200);
+    background-color: rgb(200, 200, 200);
 }
 
 table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
-.btn{
+
+.btn {
     border-radius: 15px;
     color: white;
 }
-.btn-danger{
-    background-color:orangered;
+
+.btn-danger {
+    background-color: orangered;
 }
-.btn-primary{
+
+.btn-primary {
     background-color: steelblue;
 }
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+

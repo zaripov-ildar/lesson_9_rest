@@ -1,21 +1,23 @@
 package ro.starstreet.lesson_9_rest.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import ro.starstreet.lesson_9_rest.model.Cart;
+import ro.starstreet.lesson_9_rest.model.CartItem;
 import ro.starstreet.lesson_9_rest.model.ProductDto;
 import ro.starstreet.lesson_9_rest.service.ProductService;
 
+import java.util.Map;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/products")
+@Slf4j
 public class ProductController {
-    private ProductService productService;
-
-
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
+    private final ProductService productService;
+    private final Cart cart;
 
     @GetMapping
     public Page<ProductDto> getProducts(
@@ -26,7 +28,6 @@ public class ProductController {
     ) {
 
         page = page == null || page < 1 ? 1 : page;
-        System.out.println(titlePart);
         return productService.find(minPrice, maxPrice, titlePart, page);
     }
 
@@ -39,6 +40,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         productService.deleteById(id);
+        cart.removeFromCart(id);
     }
 
     @PutMapping
@@ -47,7 +49,26 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductDto findById(@PathVariable Long id){
+    public ProductDto findById(@PathVariable Long id) {
         return productService.findById(id);
     }
+
+    @GetMapping("/cart")
+    public Map<Long, CartItem> addToCart() {
+        return cart.getCartMap();
+    }
+
+    @PutMapping("/cart/changeAmount")
+    public Map<Long, CartItem> decreaseProductAmountInCart(@RequestParam long id, @RequestParam int amount) {
+        cart.changeAmount(productService.findById(id), amount);
+        return cart.getCartMap();
+    }
+
+    @DeleteMapping("/cart/{id}")
+    public void removeFromCart(@PathVariable long id) {
+        log.debug("trying to delete");
+        cart.removeFromCart(id);
+    }
+
+
 }
