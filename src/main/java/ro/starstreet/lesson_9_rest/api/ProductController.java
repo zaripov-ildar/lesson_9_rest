@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ro.starstreet.lesson_9_rest.model.Cart;
 import ro.starstreet.lesson_9_rest.model.CartItem;
 import ro.starstreet.lesson_9_rest.model.ProductDto;
-import ro.starstreet.lesson_9_rest.service.ProductService;
+import ro.starstreet.lesson_9_rest.repositories.UserRepository;
+import ro.starstreet.lesson_9_rest.services.ProductService;
 
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import java.util.Map;
 public class ProductController {
     private final ProductService productService;
     private final Cart cart;
+
+    private final UserRepository userRepository;
 
     @GetMapping
     public Page<ProductDto> getProducts(

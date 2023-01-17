@@ -1,21 +1,19 @@
-package ro.starstreet.lesson_9_rest.service;
+package ro.starstreet.lesson_9_rest.services;
 
 import com.github.javafaker.Faker;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import ro.starstreet.lesson_9_rest.model.Product;
-import ro.starstreet.lesson_9_rest.repository.ProductRepository;
+import ro.starstreet.lesson_9_rest.model.entities.Product;
+import ro.starstreet.lesson_9_rest.repositories.ProductRepository;
 
 @Service
+@RequiredArgsConstructor
 public class ProductGenerator {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+
     @EventListener(ApplicationReadyEvent.class)
     public void generateProducts(){
         Faker faker = new Faker();

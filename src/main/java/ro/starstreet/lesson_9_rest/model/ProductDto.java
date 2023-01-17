@@ -1,6 +1,7 @@
 package ro.starstreet.lesson_9_rest.model;
 
 import lombok.Data;
+import ro.starstreet.lesson_9_rest.model.entities.Product;
 
 @Data
 public class ProductDto {

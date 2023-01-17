@@ -1,7 +1,7 @@
-package ro.starstreet.lesson_9_rest.repository.specifications;
+package ro.starstreet.lesson_9_rest.repositories.specifications;
 
 import org.springframework.data.jpa.domain.Specification;
-import ro.starstreet.lesson_9_rest.model.Product;
+import ro.starstreet.lesson_9_rest.model.entities.Product;
 
 public class ProductSpecification {
     public static Specification<Product> priceGreaterOrEqualsThan(Integer price) {

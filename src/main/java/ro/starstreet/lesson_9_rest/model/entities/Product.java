@@ -1,7 +1,9 @@
-package ro.starstreet.lesson_9_rest.model;
+package ro.starstreet.lesson_9_rest.model.entities;
 
-import jakarta.persistence.*;
 import lombok.Data;
+import ro.starstreet.lesson_9_rest.model.ProductDto;
+
+import javax.persistence.*;
 
 @Data
 @Entity

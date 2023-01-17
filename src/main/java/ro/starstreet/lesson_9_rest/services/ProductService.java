@@ -1,13 +1,13 @@
-package ro.starstreet.lesson_9_rest.service;
+package ro.starstreet.lesson_9_rest.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ro.starstreet.lesson_9_rest.model.Product;
+import ro.starstreet.lesson_9_rest.model.entities.Product;
 import ro.starstreet.lesson_9_rest.model.ProductDto;
-import ro.starstreet.lesson_9_rest.repository.ProductRepository;
-import ro.starstreet.lesson_9_rest.repository.specifications.ProductSpecification;
+import ro.starstreet.lesson_9_rest.repositories.ProductRepository;
+import ro.starstreet.lesson_9_rest.repositories.specifications.ProductSpecification;
 
 @Service
 public class ProductService {
