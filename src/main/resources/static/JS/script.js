@@ -1,5 +1,5 @@
 angular.module('store', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8081/store/products';
+    const contextPath = 'http://localhost:8081/store/manage/products';
     let totalPages = 0;
     let pageNum = 1;
     $scope.min_price = null;

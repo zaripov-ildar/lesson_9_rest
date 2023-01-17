@@ -7,20 +7,17 @@ import org.springframework.web.bind.annotation.*;
 import ro.starstreet.lesson_9_rest.model.Cart;
 import ro.starstreet.lesson_9_rest.model.CartItem;
 import ro.starstreet.lesson_9_rest.model.ProductDto;
-import ro.starstreet.lesson_9_rest.repositories.UserRepository;
 import ro.starstreet.lesson_9_rest.services.ProductService;
 
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/products")
+@RequestMapping("/manage/products")
 @Slf4j
 public class ProductController {
     private final ProductService productService;
     private final Cart cart;
-
-    private final UserRepository userRepository;
 
     @GetMapping
     public Page<ProductDto> getProducts(
@@ -72,6 +69,5 @@ public class ProductController {
         log.debug("trying to delete");
         cart.removeFromCart(id);
     }
-
 
 }
