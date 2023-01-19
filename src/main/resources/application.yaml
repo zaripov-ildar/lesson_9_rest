@@ -1,0 +1,18 @@
+server:
+  servlet:
+    context-path: /store
+  port: 8081
+spring:
+  datasource:
+    username: admin
+    password:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
